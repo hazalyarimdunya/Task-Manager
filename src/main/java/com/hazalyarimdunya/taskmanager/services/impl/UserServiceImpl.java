@@ -37,4 +37,12 @@ public class UserServiceImpl implements IUserService {
         return null;
     }
 
+    @Override
+    public void deleteUserById(Integer id) {
+        User user = getUserById(id); //once kullaniciyi al
+        if (user!=null){
+            iUserRepository.delete(user); //sil
+        }
+    }
+
 }
