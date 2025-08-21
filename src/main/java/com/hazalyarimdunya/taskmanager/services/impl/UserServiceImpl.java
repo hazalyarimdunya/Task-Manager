@@ -5,8 +5,11 @@ import com.hazalyarimdunya.taskmanager.repository.IUserRepository;
 import com.hazalyarimdunya.taskmanager.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -24,4 +27,14 @@ public class UserServiceImpl implements IUserService {
     public List<User> getAllUsers() {
         return iUserRepository.findAll();// DB de kayitli user listesi cagirilir. findAll() metodu JpaRepository icinden alindi
     }
+
+    @Override
+    public User getUserById(Integer userId) {
+        Optional<User> optional = iUserRepository.findById(userId);
+        if (optional.isPresent()){
+            return optional.get();
+        }
+        return null;
+    }
+
 }
